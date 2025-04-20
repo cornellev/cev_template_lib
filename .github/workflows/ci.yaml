@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  CI: true
+
+jobs:
+  ci:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, ubuntu-22.04-arm, macos-latest, macos-14]
+        build_type: [Release, Debug]
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
