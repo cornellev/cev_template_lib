@@ -7,6 +7,7 @@ on:
       - main
   workflow_dispatch:
 
+# Sanitizers and warnings as errors are enabled automatically
 env:
   CI: true
 
@@ -21,3 +22,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      # We could just run make test here but this will give us nicer info at a glance
+      - name: Configure
+        run: make configure CMAKE_FLAGS=-DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+      - name: Build
+        run: make build CMAKE_FLAGS=-DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+      - name: Test
+        run: make test CMAKE_FLAGS=-DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
