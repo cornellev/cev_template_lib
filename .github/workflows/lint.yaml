@@ -14,10 +14,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
       - uses: jidicula/clang-format-action@v4.15.0
         with:
           clang-format-version: "19"
           include-regex: (include|lib|test)
+      - name: Install clang toolchain
+        run: |
+          wget https://apt.llvm.org/llvm.sh
+          chmod +x llvm.sh
+          sudo ./llvm.sh 19 all
       - name: Run clang-tidy
         run: make tidy
