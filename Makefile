@@ -23,7 +23,7 @@ test: configure
 	./$(BUILD_DIR)/$(TEST_TARGET)
 
 .PHONY: tidy
-tidy:
+tidy: configure  # needed for compile commands database
 	@if [ -z "$(CI)" ]; then \
 		find . -iname '*.h' -o -iname '*.cpp' \
 		-o -path ./$(BUILD_DIR) -prune -false \
