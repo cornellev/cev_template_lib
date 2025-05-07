@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.15)
 project(Template LANGUAGES CXX)
 
 set(PROJECT_VERSION 0.0.0)
